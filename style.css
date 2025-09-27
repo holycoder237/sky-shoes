@@ -1,0 +1,356 @@
+/* styles.css - Thèmes clair/sombre, responsive, accessible
+   Remplace l'ancien CSS inline. Variables centrales et styles réutilisables.
+*/
+
+/* Variables neutres (valeurs par défaut : dark) */
+:root {
+  --bg: #071020;
+  --panel: #0e2233;
+  --accent: #2ca8ff;
+  --accent-2: #3bd1c6;
+  --muted: #9fb7c8;
+  --glass: rgba(255, 255, 255, 0.03);
+  --card-shadow: 0 8px 30px rgba(2, 8, 20, 0.6);
+  --radius: 14px;
+  --max-width: 1100px;
+  --text: #e6f7ff;
+  --focus: rgba(59, 209, 198, 0.12);
+  --btn-text-dark: #01202a;
+  --font-family: "Inter", system-ui, Arial, sans-serif;
+}
+
+/* Light theme override */
+:root[data-theme="light"],
+html[data-theme="light"] {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --accent: #1e7fe0;
+  --accent-2: #0ca89b;
+  --muted: #5b6b73;
+  --glass: rgba(2, 8, 20, 0.03);
+  --card-shadow: 0 10px 28px rgba(12, 20, 30, 0.06);
+  --text: #0b2430;
+  --focus: rgba(30, 127, 224, 0.12);
+  --btn-text-dark: #ffffff;
+}
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: radial-gradient(
+      800px 400px at 10% 10%,
+      rgba(44, 168, 255, 0.07),
+      transparent 8%
+    ),
+    radial-gradient(
+      600px 300px at 90% 70%,
+      rgba(59, 209, 198, 0.035),
+      transparent 6%
+    ),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Layout container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.logo {
+  width: 46px;
+  height: 46px;
+  display: inline-grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  flex-shrink: 0;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+header .brand small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+/* Nav */
+nav {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+nav a:hover,
+nav a:focus {
+  color: var(--accent);
+  outline: none;
+}
+
+/* Buttons */
+.cta-primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: var(--btn-text-dark);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(44, 168, 255, 0.12);
+}
+.cta-primary:focus {
+  outline: 3px solid rgba(44, 168, 255, 0.18);
+}
+.btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+.btn:hover {
+  color: var(--accent);
+}
+
+/* Hero */
+main.hero {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+@media (max-width: 920px) {
+  main.hero {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Left column */
+.hero-left {
+  padding-right: 8px;
+}
+.eyebrow {
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.hero h2 {
+  margin: 0 0 12px 0;
+  font-size: 2rem;
+  line-height: 1.02;
+}
+.hero p.lead {
+  color: var(--muted);
+  margin: 0 0 18px 0;
+  max-width: 60ch;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Products grid */
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+@media (max-width: 920px) {
+  .products {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.product {
+  background: var(--glass);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+.product:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(2, 8, 20, 0.55);
+}
+.product img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.product .meta {
+  flex: 1;
+}
+.price {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Right column (hero visual) */
+.hero-right {
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.card-surface {
+  width: 380px;
+  height: 380px;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.015),
+    transparent 40%
+  );
+  box-shadow: var(--card-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+.shoe-wrap {
+  width: 260px;
+  height: 260px;
+  transform-origin: center;
+  animation: float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(6deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+}
+
+/* Testimonials, newsletter, footer */
+.testimonials {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.testimonial {
+  background: transparent;
+  color: var(--muted);
+}
+.newsletter {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.newsletter input {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px;
+  border-radius: 10px;
+  color: inherit;
+  flex: 1;
+}
+footer {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    transform 600ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Focus visible for keyboard */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid var(--focus);
+  border-radius: 8px;
+}
+
+/* Utility small responsive tweaks */
+@media (max-width: 520px) {
+  .hero h2 {
+    font-size: 1.4rem;
+  }
+  .card-surface {
+    width: 320px;
+    height: 320px;
+  }
+  .shoe-wrap {
+    width: 220px;
+    height: 220px;
+  }
+}
